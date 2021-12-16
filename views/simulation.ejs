@@ -19,7 +19,7 @@
     </small>
   </h2>
 
- 
+
 
   <div id="cesiumContainer"></div>
 
@@ -36,31 +36,42 @@
 
   </div>
 
-    
-      <h3>Current Position Of Satellite</h3>
-    
-    <table class="table-fill">
-      <tbody class="table-hover">
-        <tr>
-          <td class="text-left">Latitude</td>
-          <td class="text-left">
-            <%= q2[q2.length-1].Latitude %>
-          </td>
-        </tr>
-        <tr>
-          <td class="text-left">Longitude</td>
-          <td class="text-left"><%= q2[q2.length-1].Longitude %></td>
-        </tr>
-        <tr>
-          <td class="text-left">Altitude</td>
-          <td class="text-left"><%= q2[q2.length-1].Altitude %></td>
-        </tr>
-      </tbody>
-    </table>
+
+  <h3>Current Position Of Satellite</h3>
+
+  <table class="table-fill">
+    <tbody class="table-hover">
+      <tr>
+        <td class="text-left">Latitude</td>
+        <td class="text-left">
+          <%= q2[q2.length-1].Latitude %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-left">Longitude</td>
+        <td class="text-left">
+          <%= q2[q2.length-1].Longitude %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-left">Altitude</td>
+        <td class="text-left">
+          <%= q2[q2.length-1].Altitude %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>
+    <%= q3[q3.length-1].ans %>
+  </h3>
+
+  <h3>
+    <%= q4[q4.length-1].ans %>
+  </h3>
 
 
 
-  
 
   <script>
     // Initialize the Cesium viewer.
