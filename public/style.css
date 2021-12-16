@@ -124,3 +124,14 @@ input:focus ~ .highlight {
 	from { background:#5264AE; }
   to 	{ width:0; background:transparent; }
 }
+
+/* SIMULATIONS ================ */
+
+.l1,.l2{
+  text-align:center; 
+  margin-bottom:5px; 
+}
+
+#cesiumContainer {
+  padding: 10px;
+}
