@@ -19,21 +19,48 @@
     </small>
   </h2>
 
-  
+ 
+
+  <div id="cesiumContainer"></div>
+
+
+  <h3>
+    TLE Data
+  </h3>
 
   <div class="l1">
     <%= l1 %>
   </div>
-  <div class="l2" >
+  <div class="l2">
     <%= l2 %>
-  
-</div>
 
-  <div id="cesiumContainer">
-    
-      
-    
   </div>
+
+    
+      <h3>Current Position Of Satellite</h3>
+    
+    <table class="table-fill">
+      <tbody class="table-hover">
+        <tr>
+          <td class="text-left">Latitude</td>
+          <td class="text-left">
+            <%= q2[q2.length-1].Latitude %>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-left">Longitude</td>
+          <td class="text-left"><%= q2[q2.length-1].Longitude %></td>
+        </tr>
+        <tr>
+          <td class="text-left">Altitude</td>
+          <td class="text-left"><%= q2[q2.length-1].Altitude %></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+  
 
   <script>
     // Initialize the Cesium viewer.
@@ -42,13 +69,13 @@
         url: Cesium.buildModuleUrl("Assets/Textures/NaturalEarthII"),
       }),
       baseLayerPicker: false, geocoder: false, homeButton: false, infoBox: false,
-      navigationHelpButton: false, 
+      navigationHelpButton: false,
     });
 
     var l1 = document.getElementsByClassName("l1")[0].innerText
     var l2 = document.getElementsByClassName("l2")[0].innerText
     console.log('sdasdd')
-    console.log(l1,l2)
+    console.log(l1, l2)
 
     const satrec = satellite.twoline2satrec(
       l1.trim(),
@@ -69,22 +96,22 @@
     viewer.timeline.zoomTo(start, stop);
     viewer.clock.multiplier = 40;
     viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP;
-    
+
 
     const positionsOverTime = new Cesium.SampledPositionProperty();
-    for (let i = 0; i < totalSeconds; i+= timestepInSeconds) {
+    for (let i = 0; i < totalSeconds; i += timestepInSeconds) {
       const time = Cesium.JulianDate.addSeconds(start, i, new Cesium.JulianDate());
       const jsDate = Cesium.JulianDate.toDate(time);
 
       const positionAndVelocity = satellite.propagate(satrec, jsDate);
       const gmst = satellite.gstime(jsDate);
-      const p   = satellite.eciToGeodetic(positionAndVelocity.position, gmst);
+      const p = satellite.eciToGeodetic(positionAndVelocity.position, gmst);
 
       const position = Cesium.Cartesian3.fromRadians(p.longitude, p.latitude, p.height * 1000);
-      
+
       positionsOverTime.addSample(time, position);
     }
-    
+
 
     // Visualize the satellite with a red dot.
     const satellitePoint = viewer.entities.add({
